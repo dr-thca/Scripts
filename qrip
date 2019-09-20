@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [[ $# -eq 0 ]] ; then
+    port=3000;
+else
+    port=$1;
+fi
+ip=$(hostname -i | awk '{$1=$1};1');
+echo "IP:${ip}";
+echo "Port:${port}";
+qrencode -t UTF8 "http://${ip}:${port}";
+

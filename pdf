@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Script for detaching zathura from terminal when opening pdf
+if [[ $1 -eq 0 ]]; then
+    echo 'Takes one(1) pdf as argument'
+    exit 0
+fi
+zathura $1 &!

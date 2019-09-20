@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# SCRIPT FOR ADDING MEME TO CORRECT FOLDER AND PRINT IN FJERDE
+
+set -e
+if [ $# -eq 0 ]
+  then
+    echo "INGEN MEMES REGISTRERT. LEGG TIL MEME SOM ARGUMENT"
+    exit 1
+fi
+img=$1 
+lp -h printhost.samfundet.no -d motzfeldt -- $img
+scp $1 cassarossa.samfundet.no:/home/cassarossa/itk/felles/memes/ITKmemes
+echo "$(figlet ITKMEMES)"
+
