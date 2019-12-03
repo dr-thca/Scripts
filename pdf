@@ -4,4 +4,11 @@ if [[ $# -eq 0 ]]; then
     echo 'Takes one(1) pdf as argument'
     exit 0
 fi
-zathura $1 &! 
+
+if [ $# -eq 1 ]; then
+    zathura $1 &! 
+fi
+
+if [ $# -eq 2 ]; then
+    okular $2 &! 
+fi

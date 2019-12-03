@@ -3,4 +3,8 @@
 # MOVES LAST FILE IN DOWNLOADS DIRECTORY TO $1 
 
 last_file=$(ls -t ~/Downloads | head -n1)
-mv ~/Downloads/$last_file $1
+if [ "$1" == "peek" ]; then
+    echo $last_file;
+else
+    mv ~/Downloads/$last_file $1;
+fi
