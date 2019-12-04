@@ -1,6 +1,11 @@
 #!/bin/sh
 
 # MOVES LAST FILE IN DOWNLOADS DIRECTORY TO $1 
+if [ $# -eq 0 ]
+  then
+    echo "No arguments given"
+    exit 1
+fi
 
 last_file=$(ls -t ~/Downloads | head -n1)
 if [ "$1" == "peek" ]; then
