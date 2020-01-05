@@ -14,9 +14,10 @@ if ["--help", "-h"].include? file
 end
 
 if file.nil?
-  fail %{
+  puts %{
   No file given. rocaf -h for help
 }
+  exit(0)
 end
 
 ending = file.match(/.*\.(.*$)/)
@@ -53,10 +54,13 @@ func_hash = {'md' => comp_markdown, 'py' => run_python, 'rb' => run_ruby, 'sh' =
 if !ending.nil?  
   begin
     func_hash.fetch(ending[1]).call(file)
+    exit(0)
   rescue KeyError
     puts "File ending not supported"
+    exit(1)
   end
 else
-  fail "No file ending found"
+  puts "No file ending found"
+  exit(1)
 end
 
