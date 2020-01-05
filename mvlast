@@ -7,6 +7,7 @@ if [ $# -eq 0 ]
     exit 1
 fi
 
+detox ~/Downloads
 last_file=$(ls -t ~/Downloads | head -n1)
 if [ "$1" == "peek" ]; then
     echo $last_file;
