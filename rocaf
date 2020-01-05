@@ -1,0 +1,61 @@
+file = ARGV[0]
+if ["--help", "-h"].include? file
+  puts %{
+  rocaf [OPTIONS] [FILE]
+  -------------------------------------------------------------
+  "Run Or Compile Any Files"
+  Takes in one(1) file as argument
+  Returns output from running the file given the file extension
+  -------------------------------------------------------------
+  Supported extensions are md(markdown), py(python) and rb(ruby)
+}
+  exit(0)
+end
+
+if file.nil?
+  fail %{
+  No file given. rocaf -h for help
+}
+end
+
+ending = file.match(/.*\.(.*$)/)
+
+## Functions for executing programs ##
+comp_markdown = proc {|file|
+  nameOfFile = file.match(/(.*)\.(.*$)/)
+  if !nameOfFile.nil?
+    shell_cmd = `pandoc #{file} --pdf-engine=xelatex -o #{nameOfFile[1]}.pdf`
+    puts shell_cmd
+  else
+    puts "Something went wrong"
+  end
+}
+
+run_python = proc { |file|
+  `python #{file}`
+}
+
+run_ruby = proc { |file|
+  `ruby #{file}`
+}
+
+run_bash = proc{ |file|
+  `bash #{file}`
+}
+## End ##
+
+## Hash with possible file extensions mapped to executing programs ##
+func_hash = {'md' => comp_markdown, 'py' => run_python, 'rb' => run_ruby, 'sh' => run_bash}
+## End ##
+
+# MAIN #
+if !ending.nil?  
+  begin
+    func_hash.fetch(ending[1]).call(file)
+  rescue KeyError
+    fail "File ending not supported"
+  end
+else
+  fail "No file ending found"
+end
+
