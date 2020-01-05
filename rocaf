@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 file = ARGV[0]
 if ["--help", "-h"].include? file
   puts %{
@@ -53,7 +54,7 @@ if !ending.nil?
   begin
     func_hash.fetch(ending[1]).call(file)
   rescue KeyError
-    fail "File ending not supported"
+    puts "File ending not supported"
   end
 else
   fail "No file ending found"
