@@ -34,15 +34,15 @@ comp_markdown = proc {|file|
 }
 
 run_python = proc { |file|
-  `python #{file}`
+  puts `python #{file}`
 }
 
 run_ruby = proc { |file|
-  `ruby #{file}`
+  puts `ruby #{file}`
 }
 
 run_bash = proc{ |file|
-  `bash #{file}`
+  puts `bash #{file}`
 }
 ## End ##
 
