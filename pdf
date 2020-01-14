@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 # Script for detaching zathura from terminal when opening pdf
-if [[ $# -eq 0 ]]; then
+if [ $# -eq 0 ]; then
     echo 'Takes one(1) pdf as argument'
+    exit 1
+fi
+
+if [ $# -eq 1 ] && [ -f "$1" ]; then
+    zathura $1 &! 
     exit 0
 fi
 
-if [ $# -eq 1 ]; then
-    zathura $1 &! 
+if [ $# -eq 2 ] && [ -f "$2" ]; then
+    okular $2 &! 
+    exit 0
 fi
 
-if [ $# -eq 2 ]; then
-    okular $2 &! 
-fi
+echo "File doesnt exist"
+exit 1
