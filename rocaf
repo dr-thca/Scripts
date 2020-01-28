@@ -4,7 +4,7 @@ if ["--help", "-h"].include? file
   puts %{
   rocaf [OPTIONS] [FILE]
   -------------------------------------------------------------
-  "Run Or Compile Any Files"
+  "Run Or Compile Any File"
   Takes in one(1) file as argument
   Returns output from running the file given the file extension
   -------------------------------------------------------------
@@ -28,6 +28,7 @@ comp_markdown = proc {|file|
   if !nameOfFile.nil?
     shell_cmd = `pandoc #{file} --pdf-engine=xelatex -o #{nameOfFile[1]}.pdf`
     puts shell_cmd
+    puts "Markdown file parsed"
   else
     puts "Something went wrong"
   end
