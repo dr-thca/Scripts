@@ -12,5 +12,6 @@ last_file=$(ls -t ~/Downloads | head -n1)
 if [ "$1" == "peek" ]; then
     echo $last_file;
 else
+    echo $last_file;
     mv ~/Downloads/$last_file $1;
 fi
