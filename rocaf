@@ -45,10 +45,15 @@ run_ruby = proc { |file|
 run_bash = proc{ |file|
   puts `bash #{file}`
 }
+
+comp_latex = proc { |file|
+  puts `latexmk -pdf #{file}`
+}
+
 ## End ##
 
 ## Hash with possible file extensions mapped to executing programs ##
-func_hash = {'md' => comp_markdown, 'py' => run_python, 'rb' => run_ruby, 'sh' => run_bash}
+func_hash = {'md' => comp_markdown, 'py' => run_python, 'rb' => run_ruby, 'sh' => run_bash, 'tex' => comp_latex}
 ## End ##
 
 # MAIN #
