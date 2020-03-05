@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # MOVES LAST FILE IN DOWNLOADS DIRECTORY TO $1 
 if [ $# -eq 0 ]
