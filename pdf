@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # Script for detaching zathura from terminal when opening pdf
 if [ $# -eq 0 ]; then
-    echo 'Takes one(1) pdf as argument'
+    file=$(find . -name "*\.pdf" | head -n1)
+    if [ file != "" ]; then
+        zathura $file &!
+        exit 0
+    fi
+    echo 'No pdf found'
     exit 1
 fi
 
