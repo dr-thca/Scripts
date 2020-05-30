@@ -28,6 +28,7 @@ comp_markdown = proc {|file|
   if !nameOfFile.nil?
     shell_cmd = `pandoc #{file} --pdf-engine=xelatex -o #{nameOfFile[1]}.pdf`
     puts shell_cmd
+    `notify-send -t 1000 "#{file} compiled to pdf"`
     puts "Markdown file parsed"
   else
     puts "Something went wrong"
