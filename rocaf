@@ -8,7 +8,8 @@ if ["--help", "-h"].include? file
   Takes in one(1) file as argument
   Returns output from running the file given the file extension
   -------------------------------------------------------------
-  Supported extensions are md(markdown), py(python), rb(ruby) and tex(latex)
+  Supported extensions are md(markdown), py(python), rb(ruby) and tex(latex).
+  Simple support for cpp(C++) and hs(Haskell)
 }
   exit(0)
 end
