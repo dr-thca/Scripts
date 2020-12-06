@@ -50,10 +50,25 @@ comp_latex = proc { |file|
   puts `latexmk -pdf #{file}`
 }
 
+run_cpp = proc { |_|
+  puts `./a.out`
+}
+
+run_haskell = proc { |_|
+  puts `cabal run`
+}
+
 ## End ##
 
 ## Hash with possible file extensions mapped to executing programs ##
-func_hash = {'md' => comp_markdown, 'py' => run_python, 'rb' => run_ruby, 'sh' => run_bash, 'tex' => comp_latex}
+func_hash = {'md' => comp_markdown,
+             'py' => run_python,
+             'rb' => run_ruby,
+             'sh' => run_bash,
+             'tex' => comp_latex,
+             'cpp' => run_cpp,
+             'hs' => run_haskell
+}
 ## End ##
 
 # MAIN #
