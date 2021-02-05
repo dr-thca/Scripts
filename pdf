@@ -2,7 +2,7 @@
 # Script for detaching zathura from terminal when opening pdf
 if [ $# -eq 0 ]; then
     file=$(find . -name "*\.pdf" | head -n1)
-    if [ file != "" ]; then
+    if [[ $file != "" ]]; then
         zathura $file &!
         exit 0
     fi
