@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Script for detaching feh from terminal when opening an image
+if [ $# -eq 0 ]; then
+    file=$(find . -name "*\.(png|jpg)" | head -n1)
+    if [[ $file != "" ]]; then
+        feh $file &!
+        exit 0
+    fi
+    echo 'No image found'
+    exit 1
+fi
+
+if [ $# -eq 1 ] && [ -f "$1" ]; then
+    feh $1 &! 
+    exit 0
+fi
