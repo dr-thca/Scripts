@@ -57,7 +57,11 @@ run_cpp = proc { |_|
 }
 
 run_haskell = proc { |_|
-  puts `cabal run`
+  puts `stack run`
+}
+
+run_rust = proc { |file|
+  puts `rustc #{file} && ./#{file.delete_suffix('.rs')}`
 }
 
 ## End ##
@@ -69,7 +73,8 @@ func_hash = {'md' => comp_markdown,
              'sh' => run_bash,
              'tex' => comp_latex,
              'cpp' => run_cpp,
-             'hs' => run_haskell
+             'hs' => run_haskell,
+             'rs' => run_rust
 }
 ## End ##
 
