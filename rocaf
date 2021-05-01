@@ -53,7 +53,13 @@ comp_latex = proc { |file|
 }
 
 run_cpp = proc { |_|
-  puts `./a.out`
+  no_suffix = file.delete_suffix('.cpp')
+  puts `g++ -std=c++0x -o #{file} #{no_suffix} && ./#{no_suffix}` 
+}
+
+run_c = proc { |file|
+  no_suffix = file.delete_suffix('.c')
+  puts `gcc -o #{no_suffix} #{file} && ./#{no_suffix}` 
 }
 
 run_haskell = proc { |_|
@@ -74,7 +80,8 @@ func_hash = {'md' => comp_markdown,
              'tex' => comp_latex,
              'cpp' => run_cpp,
              'hs' => run_haskell,
-             'rs' => run_rust
+             'rs' => run_rust,
+              'c' => run_c
 }
 ## End ##
 
