@@ -54,7 +54,7 @@ comp_latex = proc { |file|
 
 run_cpp = proc { |_|
   no_suffix = file.delete_suffix('.cpp')
-  puts `g++ -std=c++0x -o #{file} #{no_suffix} && ./#{no_suffix}` 
+  puts `g++ -std=c++0x -o #{no_suffix} #{file} && ./#{no_suffix}` 
 }
 
 run_c = proc { |file|
