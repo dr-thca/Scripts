@@ -62,8 +62,9 @@ run_c = proc { |file|
   puts `gcc -o #{no_suffix} #{file} && ./#{no_suffix}` 
 }
 
-run_haskell = proc { |_|
-  puts `stack run`
+run_haskell = proc { |file|
+  no_suffix = file.delete_suffix('.hs')
+  puts `ghc -o #{no_suffix} #{file} && ./#{no_suffix}`
 }
 
 run_rust = proc { |file|
