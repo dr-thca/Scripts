@@ -71,6 +71,10 @@ run_rust = proc { |file|
   puts `rustc #{file} && ./#{file.delete_suffix('.rs')}`
 }
 
+comp_dot = proc { |file|
+  puts `dot -Tpng #{file} > #{file.delete_suffix('.dot')}.png`
+}
+
 ## End ##
 
 ## Hash with possible file extensions mapped to executing programs ##
@@ -82,7 +86,8 @@ func_hash = {'md' => comp_markdown,
              'cpp' => run_cpp,
              'hs' => run_haskell,
              'rs' => run_rust,
-              'c' => run_c
+              'c' => run_c,
+             'dot' => comp_dot
 }
 ## End ##
 
