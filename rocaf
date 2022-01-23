@@ -37,7 +37,7 @@ comp_markdown = proc {|file|
 }
 
 run_python = proc { |file|
-  puts `python #{file}`
+  puts `python3 #{file}`
 }
 
 run_ruby = proc { |file|
@@ -52,9 +52,14 @@ comp_latex = proc { |file|
   puts `latexmk -pdf #{file}`
 }
 
-run_cpp = proc { |file|
+run_cpp_old = proc { |file|
   no_suffix = file.delete_suffix('.cpp')
   puts `g++ -std=c++0x -o #{no_suffix} #{file} && ./#{no_suffix}` 
+}
+
+run_cpp = proc { |file|
+  no_suffix = file.delete_suffix('.cpp')
+  puts `make && ./#{no_suffix}`
 }
 
 run_c = proc { |file|
@@ -67,8 +72,12 @@ run_haskell = proc { |file|
   puts `ghc -o #{no_suffix} #{file} && ./#{no_suffix}`
 }
 
-run_rust = proc { |file|
+run_rust_old = proc { |file|
   puts `rustc #{file} && ./#{file.delete_suffix('.rs')}`
+}
+
+run_rust = proc { |file|
+  puts `cargo run`
 }
 
 comp_dot = proc { |file|
