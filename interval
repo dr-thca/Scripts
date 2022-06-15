@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-node ./clock-cli/index.js
+node ~/dev/scripts/clock-cli/index.js $@
