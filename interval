@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+node ./clock-cli/index.js
