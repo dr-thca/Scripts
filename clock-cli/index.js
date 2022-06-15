@@ -21,10 +21,20 @@ function turnInputIntoTwoDates(input) {
     var _a = input.split(" ").map(turnStringIntoDate), start = _a[0], end = _a[1];
     return { start: start, end: end };
 }
-var rl = readline.createInterface({ input: node_process_1.stdin, output: node_process_1.stdout });
-rl.question('HH:MM HH:MM> ', function (answer) {
-    var twodates = turnInputIntoTwoDates(answer);
-    var interval = getDateObjectWithInterval(twodates);
+var _a = process.argv.slice(2), start = _a[0], end = _a[1];
+if (start == undefined && end == undefined) {
+    var rl_1 = readline.createInterface({ input: node_process_1.stdin, output: node_process_1.stdout });
+    rl_1.question('HH:MM HH:MM> ', function (answer) {
+        var twodates = turnInputIntoTwoDates(answer);
+        var interval = getDateObjectWithInterval(twodates);
+        console.log(dateToString(interval));
+        rl_1.close();
+    });
+}
+else {
+    var interval = getDateObjectWithInterval({
+        start: turnStringIntoDate(start),
+        end: turnStringIntoDate(end)
+    });
     console.log(dateToString(interval));
-    rl.close();
-});
+}

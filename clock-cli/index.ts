@@ -28,11 +28,21 @@ function turnInputIntoTwoDates(input: String): TwoDates {
     return { start, end }
 }
 
-const rl = readline.createInterface({ input, output });
-rl.question('HH:MM HH:MM> ', (answer) => {
-    const twodates = turnInputIntoTwoDates(answer)
-    const interval = getDateObjectWithInterval(twodates)
-    console.log(dateToString(interval))
-    rl.close();
-});
+const [start, end] = process.argv.slice(2) as [string?, string?];
+if (start == undefined && end == undefined) {
+    const rl = readline.createInterface({ input, output });
+    rl.question('HH:MM HH:MM> ', (answer) => {
+        const twodates = turnInputIntoTwoDates(answer)
+        const interval = getDateObjectWithInterval(twodates)
+        console.log(dateToString(interval))
+        rl.close();
+    });
+} else {
+        const interval = getDateObjectWithInterval({
+            start:turnStringIntoDate(start),
+            end:turnStringIntoDate(end)
+        })
+        console.log(dateToString(interval))
+}
+
 
