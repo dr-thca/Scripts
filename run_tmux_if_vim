@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+if (( ${+VIMRUNTIME} )); then
+    tmux new-session -A -s main
+fi
+

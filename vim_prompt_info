@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+local vim_prompt=''
+if (( ${+VIMRUNTIME} )); then
+    echo -n "vim "
+fi
+local session_prompt=''
+if [ -f Session.vim ]; then
+    echo -n "⏯️"
+fi
