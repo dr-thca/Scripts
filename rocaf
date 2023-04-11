@@ -64,7 +64,8 @@ run_cpp = proc { |file|
 
 run_c = proc { |file|
   no_suffix = file.delete_suffix('.c')
-  puts `gcc -o #{no_suffix} #{file} && ./#{no_suffix}` 
+  #puts `gcc -fsanitize=address -g -o0 -Wall -o #{no_suffix} #{file} && ./#{no_suffix}` 
+  puts `gcc -g -o0 -Wall -o #{no_suffix} #{file} && ./#{no_suffix}` 
 }
 
 run_haskell = proc { |file|
@@ -79,6 +80,17 @@ run_rust_old = proc { |file|
 run_rust = proc { |file|
   puts `cargo run`
 }
+run_js = proc { |file|
+  puts `node #{file}`
+}
+
+run_ts = proc { |file|
+  puts `npx ts-node #{file}`
+}
+
+run_java = proc { |file|
+  puts `gradle run`
+}
 
 comp_dot = proc { |file|
   puts `dot -Tpng #{file} > #{file.delete_suffix('.dot')}.png`
@@ -88,15 +100,18 @@ comp_dot = proc { |file|
 
 ## Hash with possible file extensions mapped to executing programs ##
 func_hash = {'md' => comp_markdown,
+              'c' => run_c,
+             'cpp' => run_cpp,
+             'dot' => comp_dot,
+             'hs' => run_haskell,
+             'java' => run_java,
              'py' => run_python,
              'rb' => run_ruby,
+             'rs' => run_rust,
              'sh' => run_bash,
              'tex' => comp_latex,
-             'cpp' => run_cpp,
-             'hs' => run_haskell,
-             'rs' => run_rust,
-              'c' => run_c,
-             'dot' => comp_dot
+             'js' => run_js,
+             'ts' => run_ts
 }
 ## End ##
 
