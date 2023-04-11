@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+if (( ${+AWS_VAULT} )); then
+    echo -n "aws-vault🔓"
+fi
