@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+url = 'https://jiradrdk.atlassian.net/browse/'
+branch_name = `git rev-parse --abbrev-ref HEAD`
+`open #{url + branch_name}`
