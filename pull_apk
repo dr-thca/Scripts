@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+adb pull $(adb shell pm list packages | fzf | cut -c 9- | xargs adb shell pm path | cut -c 9- | head -n1) $1
