@@ -1,10 +1,10 @@
 import * as readline from "node:readline";
 import { stdin as input, stdout as output } from "node:process";
 
-interface TwoDates {
+type TwoDates = {
   start: Date;
   end: Date;
-}
+};
 
 function getDateObjectWithInterval({ start, end }: TwoDates): Date {
   return new Date(end.getTime() - start.getTime());
@@ -19,11 +19,11 @@ function turnStringIntoDate(input: string): Date {
   return x;
 }
 
-function dateToString(date: Date): String {
+function dateToString(date: Date): string {
   return `${date.getUTCHours()}:${date.getMinutes()}`;
 }
 
-function turnInputIntoTwoDates(input: String): TwoDates {
+function turnInputIntoTwoDates(input: string): TwoDates {
   const [start, end] = input.split(" ").map(turnStringIntoDate);
   return { start, end };
 }
@@ -31,16 +31,18 @@ function turnInputIntoTwoDates(input: String): TwoDates {
 const [start, end] = process.argv.slice(2) as [string?, string?];
 if (start == undefined && end == undefined) {
   const rl = readline.createInterface({ input, output });
-  rl.question("HH:MM HH:MM> ", (answer) => {
+  rl.question("HH:MM HH:MM> ", (answer: string) => {
     const twodates = turnInputIntoTwoDates(answer);
     const interval = getDateObjectWithInterval(twodates);
     console.log(dateToString(interval));
     rl.close();
   });
-} else {
+} else if (start != undefined && end != undefined) {
   const interval = getDateObjectWithInterval({
     start: turnStringIntoDate(start),
     end: turnStringIntoDate(end),
   });
   console.log(dateToString(interval));
+} else {
+  console.log("Invalid input");
 }
