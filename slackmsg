@@ -1,0 +1,32 @@
+#!/usr/bin/ruby
+require 'json'
+jira_id = ARGV[0]
+if jira_id.nil?
+  puts "Trying to get JIRA ID from git branch name"
+  jira_id = `git rev-parse --abbrev-ref HEAD`.strip
+  if !jira_id.start_with?("NA")
+    STDERR.puts "Invalid JIRA ID? #{jira_id}"
+    exit 1
+  end
+end
+
+if jira_id.nil?
+  STDERR.puts "Unable to get JIRA ID"
+  exit 1
+end
+
+jira_url = 'https://jiradrdk.atlassian.net/browse/' + jira_id
+puts "Fetching PR URL"
+pull_request_url = JSON.parse(`gh pr view --json url`.strip)['url']
+if pull_request_url.nil?
+  STDERR.puts "Unable to get pull request url"
+  exit 1
+end
+msg = "[#{jira_id}](#{jira_url}) \n[PR](#{pull_request_url})"
+puts "==================================="
+puts msg
+puts "==================================="
+puts "Copied to clipboard"
+`echo "#{msg}" | pbcopy`
+
+
