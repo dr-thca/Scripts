@@ -1,0 +1,14 @@
+#!/usr/bin/ruby
+link = ARGV[0]
+if link.nil?
+  puts "Usage: kimaira_link.rb <dr.dk link>"
+  exit
+end
+urn = `curl -s #{link} | rg '"dr:urn" content="(.*?)"' -or '$1'`
+kimaira = "https://dr.dk/tjenester/kimaira/article"
+url = "#{kimaira}/#{urn}"
+puts url
+`echo "#{url}" | pbcopy`
+puts "URL copied to clipboard"
+
+
